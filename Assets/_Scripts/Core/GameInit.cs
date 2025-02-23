@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using _Scripts.EventBus;
 using _Scripts.Managers;
 using Giroo.Core.Scriptables;
 using UnityEngine;
@@ -14,6 +16,7 @@ namespace Giroo.Core
         private List<ILateUpdateable> _lateUpdateables = new List<ILateUpdateable>();
         private List<IFixedUpdateable> _fixedUpdateables = new List<IFixedUpdateable>();
         private List<IInitializable> _initializables = new List<IInitializable>();
+        private List<IDisposable> _disposables = new List<IDisposable>();
 
         public void OnEnable()
         {
@@ -28,8 +31,14 @@ namespace Giroo.Core
             //Add all mandatory managers here
             LevelManager levelManager = new LevelManager();
             _initializables.Add(levelManager);
+            _disposables.Add(levelManager);
 
-            Game.InitializeManagers(levelManager);
+            GameManager gameManager = new GameManager();
+            _initializables.Add(gameManager);
+            _disposables.Add(gameManager);
+
+
+            Game.InitializeManagers(levelManager, gameManager);
 
             //Add all custom managers here
             Game.InitializeCustomManagers();
@@ -40,6 +49,7 @@ namespace Giroo.Core
             }
 
             Debug.Log("GameInit Initialized");
+            EventBus<CoreEvents.GameInitialized>.Publish(new CoreEvents.GameInitialized());
         }
 
         public void Update()
@@ -63,6 +73,14 @@ namespace Giroo.Core
             foreach (var fixedUpdateable in _fixedUpdateables)
             {
                 fixedUpdateable.FixedUpdate(Time.deltaTime);
+            }
+        }
+
+        public void OnDestroy()
+        {
+            foreach (var disposable in _disposables)
+            {
+                disposable.Dispose();
             }
         }
     }
