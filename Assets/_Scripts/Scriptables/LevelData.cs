@@ -7,6 +7,7 @@ namespace Giroo.Core.Scriptables
     [CreateAssetMenu(fileName = "LevelData", menuName = "Core/LevelData", order = 0)]
     public class LevelData : ScriptableObject
     {
+        public int loopIndex;
         public List<string> levels;
     }
 }

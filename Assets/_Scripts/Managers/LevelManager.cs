@@ -32,6 +32,8 @@ namespace _Scripts.Managers
         {
             LoadSavedData();
 
+            _loopIndex = Game.LevelData.loopIndex;
+
             if (Game.Settings.isTest)
             {
                 LoadComplete(new AsyncOperation());
