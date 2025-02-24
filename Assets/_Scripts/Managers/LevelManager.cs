@@ -46,7 +46,7 @@ namespace _Scripts.Managers
         {
             var levelIndex = GetLevelIndex(_currentLevel);
             var scene = Game.LevelData.levels[levelIndex - 1];
-            LoadAsync(scene.name);
+            LoadAsync(scene);
         }
 
         public void NextLevel()
@@ -55,7 +55,7 @@ namespace _Scripts.Managers
             LevelUp();
             var oldLevelIndex = GetLevelIndex(oldLevel);
             var oldScene = Game.LevelData.levels[oldLevelIndex - 1];
-            UnloadAsync(oldScene.name);
+            UnloadAsync(oldScene);
         }
 
         public void RestartLevel()
@@ -63,7 +63,7 @@ namespace _Scripts.Managers
             var oldLevel = _currentLevel;
             var oldLevelIndex = GetLevelIndex(oldLevel);
             var oldScene = Game.LevelData.levels[oldLevelIndex - 1];
-            UnloadAsync(oldScene.name);
+            UnloadAsync(oldScene);
         }
 
         public void LoadAsync(string sceneName)

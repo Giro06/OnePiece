@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Giroo.Core.Scriptables
 {
@@ -6,5 +7,7 @@ namespace Giroo.Core.Scriptables
     public class GameSettings : ScriptableObject
     {
         public bool isTest;
+
+        [BoxGroup("Level")] public int levelCompleteEarnAmount;
     }
 }

@@ -37,8 +37,16 @@ namespace Giroo.Core
             _initializables.Add(gameManager);
             _disposables.Add(gameManager);
 
+            InputManager inputManager = new InputManager();
+            _updateables.Add(inputManager);
+            _initializables.Add(inputManager);
+            _disposables.Add(inputManager);
 
-            Game.InitializeManagers(levelManager, gameManager);
+            CurrencyManager currencyManager = new CurrencyManager();
+            _initializables.Add(currencyManager);
+            _disposables.Add(currencyManager);
+
+            Game.InitializeManagers(levelManager, gameManager, inputManager, currencyManager);
 
             //Add all custom managers here
             Game.InitializeCustomManagers();

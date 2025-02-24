@@ -12,6 +12,10 @@ namespace Giroo.Core
         public static LevelManager LevelManager { get; private set; }
         public static GameManager GameManager { get; private set; }
 
+        public static InputManager InputManager { get; private set; }
+
+        public static CurrencyManager CurrencyManager { get; private set; }
+
         public static void InitializeSettings(GameSettings settings)
         {
             Settings = settings;
@@ -24,10 +28,13 @@ namespace Giroo.Core
             Debug.Log("LevelData Initialized");
         }
 
-        public static void InitializeManagers(LevelManager levelManager, GameManager gameManager)
+        public static void InitializeManagers(LevelManager levelManager, GameManager gameManager,
+            InputManager inputManager, CurrencyManager currencyManager)
         {
             LevelManager = levelManager;
             GameManager = gameManager;
+            InputManager = inputManager;
+            CurrencyManager = currencyManager;
             Debug.Log("Managers Initialized");
         }
 
