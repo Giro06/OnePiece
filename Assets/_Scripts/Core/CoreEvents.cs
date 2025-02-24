@@ -1,5 +1,6 @@
 ﻿using _Scripts.EventBus.Interface;
 using Giro.Core.Enum;
+using UnityEngine;
 
 namespace Giroo.Core
 {
@@ -87,6 +88,31 @@ namespace Giroo.Core
             public CurrencyType currencyType;
         }
         
+        #endregion
+
+        #region FeelEvent
+
+        public struct FeelEvent :IEvent
+        {
+            public Vector3 position;
+            public Transform parent;
+            public FeelType FeelType;
+
+            public FeelEvent(FeelType feelType)
+            {
+                FeelType = feelType;
+                position = Vector3.zero;
+                parent = null;
+            }
+
+            public FeelEvent(Vector3 position, Transform parent, FeelType feelType)
+            {
+                this.position = position;
+                this.parent = parent;
+                FeelType = feelType;
+            }
+        }
+
         #endregion
     }
 }

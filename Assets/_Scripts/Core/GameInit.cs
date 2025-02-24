@@ -11,6 +11,7 @@ namespace Giroo.Core
     {
         public GameSettings gameSettings;
         public LevelData levelData;
+        public AudioSource audioSource;
 
         private List<IUpdateable> _updateables = new List<IUpdateable>();
         private List<ILateUpdateable> _lateUpdateables = new List<ILateUpdateable>();
@@ -27,6 +28,7 @@ namespace Giroo.Core
         {
             Game.InitializeSettings(gameSettings);
             Game.InitializeLevelData(levelData);
+            Game.InitializeAudioSource(audioSource);
 
             //Add all mandatory managers here
             LevelManager levelManager = new LevelManager();
@@ -46,7 +48,15 @@ namespace Giroo.Core
             _initializables.Add(currencyManager);
             _disposables.Add(currencyManager);
 
-            Game.InitializeManagers(levelManager, gameManager, inputManager, currencyManager);
+            AdManager adManager = new AdManager();
+            _initializables.Add(adManager);
+            _disposables.Add(adManager);
+
+            SoundManager soundManager = new SoundManager();
+            _initializables.Add(soundManager);
+            _disposables.Add(soundManager);
+
+            Game.InitializeManagers(levelManager, gameManager, inputManager, currencyManager, adManager, soundManager);
 
             //Add all custom managers here
             Game.InitializeCustomManagers();
